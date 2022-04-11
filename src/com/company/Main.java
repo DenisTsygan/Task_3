@@ -5,31 +5,34 @@ import java.util.Random;
 public class Main {
 
     public static void main(String[] args) {
-        //Task_21();
+        Task_22();
         //Task_45();
-        Task_11();
+        //Task_11();
         //Task_65();
     }
 
     /**
-     * Дано целое положительное число. Вывести символы, изображающие цифры этого числа (в порядке справа налево).
+     * Дана строка, изображающая целое положительное число. Вывести сумму цифр этого числа.
      */
-    private static void Task_21() {
+    private static void Task_22() {
         Random random = new Random();
-        String number = random.nextInt(100000) + 1 + "";
-        System.out.println(number);
-        String[] num = number.split("");
-        for (int i = num.length - 1; i >= 0; i--) {
-            System.out.print(num[i]);
+        int number=random.nextInt(100000) + 1;
+        String str_number = number+"";
+        System.out.println(str_number);
+        int sum_number=0;
+        while (number!=0){
+            sum_number+=number%10;
+            number = number / 10;
         }
+        System.out.println("Сумма цифр этого числа="+sum_number);
     }
-
     /**
      * Дана строка, состоящая из слов кириллицей, разделенных пробелами (одним или несколькими).
      * Найти длину самого короткого слова.
      */
     private static void Task_45() {
-        String text = "Дана   строка    состоящая из слов    кириллицей разделенных  пробелами  слова";
+        String text = " а   строка    состоящая из слов    кириллицей разделенных  пробелами  слова";
+        text = text.strip();
         System.out.println(text);
         while (text.contains("  ")) {
             text = text.replace("  ", " ");
@@ -53,9 +56,6 @@ public class Main {
         char[] element = str.toCharArray();
         for (int i = 0; i < str.length(); i++) {
             System.out.print(element[i] + " ");
-            if (i == str.length() - 1) {
-                System.out.print(element[i]);
-            }
         }
     }
 
@@ -127,6 +127,7 @@ public class Main {
         char[] alphabet = creating_alphabet();
         final int SIZE_ALPHABET = 32;
         int index_first_element = 0;
+        int index_first_decryption = 0;
         if (Character.isUpperCase(element_str[0])) {
             char[] BIG_alpabet = new char[SIZE_ALPHABET];
             int index_BIG_alphabet = 0;
@@ -137,8 +138,11 @@ public class Main {
             for (int i = 0; i < BIG_alpabet.length; i++) {
                 if (element_str[0] == BIG_alpabet[i]) {
                     index_first_element = i + 1;
-                    break;
                 }
+                if (first_decryption == BIG_alpabet[i]) {
+                    index_first_decryption = i + 1;
+                }
+
             }
         } else {
             char[] small_alpabet = new char[SIZE_ALPHABET];
@@ -150,35 +154,9 @@ public class Main {
             for (int i = 0; i < small_alpabet.length; i++) {
                 if (element_str[0] == small_alpabet[i]) {
                     index_first_element = i + 1;
-                    break;
                 }
-            }
-        }
-        int index_first_decryption = 0;
-        if (Character.isUpperCase(first_decryption)) {
-            char[] BIG_alpabet = new char[SIZE_ALPHABET];
-            int index_BIG_alphabet = 0;
-            for (char i = 'А'; i <= 'Я'; i++) {
-                BIG_alpabet[index_BIG_alphabet] = i;
-                index_BIG_alphabet++;
-            }
-            for (int i = 0; i < BIG_alpabet.length; i++) {
-                if (first_decryption == BIG_alpabet[i]) {
-                    index_first_decryption = i + 1;
-                    break;
-                }
-            }
-        } else {
-            char[] small_alpabet = new char[SIZE_ALPHABET];
-            int index_small_alphabet = 0;
-            for (char i = 'а'; i <= 'я'; i++) {
-                small_alpabet[index_small_alphabet] = i;
-                index_small_alphabet++;
-            }
-            for (int i = 0; i < small_alpabet.length; i++) {
                 if (first_decryption == small_alpabet[i]) {
                     index_first_decryption = i + 1;
-                    break;
                 }
             }
         }
